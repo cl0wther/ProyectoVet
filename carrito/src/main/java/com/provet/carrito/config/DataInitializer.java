@@ -1,6 +1,7 @@
 package com.provet.carrito.config;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +29,7 @@ public class DataInitializer implements CommandLineRunner {
             
             Carrito carrito = new Carrito();
             carrito.setUsuario("101L"); // ID de usuario de prueba
+            carrito.setFechaCreacion(LocalDateTime.now());
 
         
             ItemCarrito item1 = new ItemCarrito(1L, "Amoxicilina", new BigDecimal("8500"), 2, carrito); // 2 unidades de Amoxicilina
