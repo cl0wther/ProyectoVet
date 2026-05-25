@@ -5,7 +5,6 @@ import com.provet.pedidos.dto.PedidoResponseDTO;
 import com.provet.pedidos.service.PedidoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +19,7 @@ public class PedidoController {
 
     @PostMapping
     public ResponseEntity<PedidoResponseDTO> crear(@Valid @RequestBody PedidoRequestDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoService.crearPedido(dto));
+        return ResponseEntity.status(201).body(pedidoService.crearPedido(dto));
     }
 
     @GetMapping

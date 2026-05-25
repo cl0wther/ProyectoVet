@@ -23,10 +23,10 @@ public class InventarioController {
 
     // 1. Registrar un producto nuevo en bodega
     @PostMapping
-    public ResponseEntity<InventarioResponseDTO> registrarProducto(@RequestBody InventarioRequestDTO request) {
-        log.info("Recibida solicitud para registrar nuevo producto en bodega: ID {}", request.getIdProducto());
-        return ResponseEntity.status(HttpStatus.CREATED)
-                             .body(inventarioService.registrarProducto(request));
+    public ResponseEntity<InventarioResponseDTO> registrarProducto(@RequestBody InventarioRequestDTO dto) {
+        log.info("Recibida solicitud para registrar nuevo producto en bodega: ID {}", dto.getIdProducto());
+        return ResponseEntity.status(201)
+                             .body(inventarioService.registrarProducto(dto));
     }
 
     // 2. Descontar stock (Este endpoint lo llamará Pedidos/Pagos tras una venta)
