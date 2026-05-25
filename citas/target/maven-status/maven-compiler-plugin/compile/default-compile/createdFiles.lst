@@ -1,0 +1,13 @@
+com\provet\citas\exception\GlobalExceptionHandler.class
+com\provet\citas\CitasApplication.class
+com\provet\citas\dto\MascotaDTO.class
+com\provet\citas\services\CitaService.class
+com\provet\citas\dto\DuenioDTO.class
+com\provet\citas\dto\CitaResponseDTO.class
+com\provet\citas\client\MascotaClient.class
+com\provet\citas\client\DuenioClient.class
+com\provet\citas\config\DataInitializer.class
+com\provet\citas\dto\CitaRequestDTO.class
+com\provet\citas\controller\CitaController.class
+com\provet\citas\repository\CitaRepository.class
+com\provet\citas\model\Cita.class
