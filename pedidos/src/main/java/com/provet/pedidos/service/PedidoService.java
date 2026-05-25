@@ -1,18 +1,18 @@
 package com.provet.pedidos.service;
 
+import com.provet.pedidos.client.BodegaClient;
 import com.provet.pedidos.client.CatalogoClient;
+import com.provet.pedidos.client.PagosClient;
 import com.provet.pedidos.client.UsuariosClient;
 import com.provet.pedidos.dto.*;
 import com.provet.pedidos.model.Pedido;
 import com.provet.pedidos.repository.PedidoRepository;
-import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,46 +24,31 @@ public class PedidoService {
     private final PedidoRepository pedidoRepository;
     private final CatalogoClient catalogoClient;
     private final UsuariosClient usuariosClient;
+    private final BodegaClient bodegaClient; 
+    private final PagosClient pagosClient; 
 
-    @Transactional
-    public PedidoResponseDTO crearPedido(PedidoRequestDTO dto) {
-        // 1. Validar Usuario en provet-usuarios
-        try {
-            usuariosClient.obtenerUsuarioPorNombre(dto.getUsuario());
-        } catch (FeignException.NotFound e) {
-            throw new RuntimeException("El usuario '" + dto.getUsuario() + "' no se encuentra registrado.");
-        } catch (FeignException e) {
-            throw new RuntimeException("Error en la comunicación con el servicio de usuarios.");
+        @Transactional
+        public PedidoResponseDTO crearPedido(PedidoRequestDTO request) {
+        
+        MedicamentoDTO med = catalogoClient.obtenerMedicamento(request.getMedicamentoId());
+        BigDecimal total = med.getPrecio().multiply(BigDecimal.valueOf(request.getCantidad()));
+
+        Boolean hayStock = bodegaClient.verificarStock(med.getId(), request.getCantidad());
+        if (!hayStock) {
+            throw new RuntimeException("No hay stock suficiente en la bodega para este producto.");
         }
 
-        // 2. Validar y obtener el medicamento desde provet-catalogo
-        MedicamentoDTO medicamento;
-        try {
-            medicamento = catalogoClient.obtenerMedicamento(dto.getMedicamentoId());
-        } catch (FeignException.NotFound e) {
-            throw new RuntimeException("El medicamento con ID " + dto.getMedicamentoId() + " no existe.");
-        } catch (FeignException e) {
-            throw new RuntimeException("Error en la comunicación con el catálogo de medicamentos.");
-        }
+        Pedido nuevoPedido = new Pedido();
+        Pedido pedidoGuardado = pedidoRepository.save(nuevoPedido);
 
-        // 3. Validar disponibilidad de Stock
-        if (medicamento.getStock() != null && medicamento.getStock() < dto.getCantidad()) {
-            throw new RuntimeException("Stock insuficiente para '" + medicamento.getNombre() + "'. Disponibles: " + medicamento.getStock());
-        }
+        PagoRequestDTO pagoRequest = new PagoRequestDTO(
+            pedidoGuardado.getId(), total, request.getMetodoPago() 
+        );
+        pagosClient.procesarPago(pagoRequest);
 
-        // 4. Mapear y procesar la persistencia del pedido
-        Pedido pedido = new Pedido();
-        pedido.setUsuario(dto.getUsuario());
-        pedido.setMedicamentoId(dto.getMedicamentoId());
-        pedido.setNombreMedicamento(medicamento.getNombre());
-        pedido.setCantidad(dto.getCantidad());
-        pedido.setPrecioUnitario(medicamento.getPrecio());
-        pedido.setTotal(medicamento.getPrecio().multiply(BigDecimal.valueOf(dto.getCantidad())));
-        pedido.setFechaPedido(LocalDateTime.now());
+        bodegaClient.descontarStock(med.getId(), request.getCantidad());
 
-        Pedido guardado = pedidoRepository.save(pedido);
-        log.info("Pedido registrado con éxito. ID asignado: {}", guardado.getId());
-        return mapToDTO(guardado);
+        return mapToDTO(pedidoGuardado);
     }
 
     @Transactional(readOnly = true)

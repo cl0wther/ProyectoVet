@@ -21,4 +21,6 @@ public class PedidoRequestDTO {
     @NotNull(message = "La cantidad es obligatoria")
     @Min(value = 1, message = "La cantidad mínima para procesar un pedido es 1")
     private Integer cantidad;
+
+    private String metodoPago;
 }

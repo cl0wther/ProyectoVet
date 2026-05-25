@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AjusteStockDTO {
     private Long idProducto;
-    private Integer cantidad; // Cuánto hay que restar (en caso de venta) o sumar (en caso de devolución)
+    private Integer cantidad; 
 }
