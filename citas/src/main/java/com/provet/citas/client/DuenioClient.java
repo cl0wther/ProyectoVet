@@ -9,8 +9,7 @@ import com.provet.citas.dto.DuenioDTO;
 @FeignClient(name = "duenio-service", url = "${duenio.service.url}")
 public interface DuenioClient {
 
-    // Asumiendo que el MS de mascota tiene un endpoint estándar de búsqueda por ID
-    @GetMapping("/api/mascotas/{id}")
-    DuenioDTO obtenerMascotaPorId(@PathVariable("id") Long id);
+    @GetMapping("/api/duenio/{id}")
+    DuenioDTO obtenerDuenioPorId(@PathVariable("id") Long id);
 }
 

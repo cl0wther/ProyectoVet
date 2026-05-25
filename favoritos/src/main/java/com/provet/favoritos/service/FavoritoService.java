@@ -27,13 +27,10 @@ public class FavoritoService {
     @Transactional
     public FavoritoResponseDTO agregar(FavoritoRequestDTO dto) {
         
-        usuariosClient.buscarPorNombre(dto.getUsuario())
-                .orElseThrow(() -> new RuntimeException(
-                        "El usuario '" + dto.getUsuario() + "' no existe en el sistema"));
+        usuariosClient.obtenerDuenioPorNombre(dto.getUsuario());
 
-        MedicamentoDTO medicamento = catalogoClient.buscarMedicamento(dto.getMedicamentoId())
-                .orElseThrow(() -> new RuntimeException(
-                        "El medicamento con id " + dto.getMedicamentoId() + " no existe en el catálogo"));
+        MedicamentoDTO medicamento = catalogoClient.obtenerMedicamento(dto.getMedicamentoId()); 
+                
 
         if (favoritoRepository.existsByMedicamentoIdAndUsuario(dto.getMedicamentoId(), dto.getUsuario())) {
             throw new RuntimeException(

@@ -11,5 +11,5 @@ public interface DuenioClient {
 
     // Asumiendo que el MS de mascota tiene un endpoint estándar de búsqueda por ID
     @GetMapping("/api/mascotas/{id}")
-    DuenioDTO obtenerMascotaPorId(@PathVariable("id") Long id);
+    DuenioDTO obtenerMascotaPorNombre(@PathVariable("nombre") String nombre);
 }

@@ -8,8 +8,6 @@ import com.provet.citas.dto.MascotaDTO;
 
 @FeignClient(name = "mascota-service", url = "${mascota.service.url}")
 public interface MascotaClient {
-
-    // Asumiendo que el MS de mascota tiene un endpoint estándar de búsqueda por ID
     @GetMapping("/api/mascotas/{id}")
     MascotaDTO obtenerMascotaPorId(@PathVariable("id") Long id);
 }
