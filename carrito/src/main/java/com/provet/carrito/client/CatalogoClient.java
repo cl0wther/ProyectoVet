@@ -19,6 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "provet-catalogo", url = "${catalogo.service.url}")
 public interface CatalogoClient {
 
-    @GetMapping("/api/medicamentos/{id}")
+    @GetMapping("/api/medicamento/{id}")
     MedicamentoDTO obtenerMedicamento(@PathVariable Long id);
 }
