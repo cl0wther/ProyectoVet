@@ -28,8 +28,9 @@ public class MedService {
     }
 
     public Optional<MedResponseDTO> obtenerPorId(Long id){
-        log.info("Consulta medicamento id={}", id);
-        return medRepository.findById(id).map(this::mapToDTO);
+        Medicamento med = medRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No se encontró medicamento con id: " + id));
+        return Optional.of(mapToDTO(med));
     }
 
     public MedResponseDTO guardar (MedRequestDTO dto){

@@ -13,7 +13,7 @@ public class MedicamentoDTO {
     
     private Long id;
     private String nombre;
-    private String sku; // O el nombre exacto que le diste al código de barras en tu modelo
+    private String sku; 
     private BigDecimal precio;
     private Boolean requiereReceta;
 }

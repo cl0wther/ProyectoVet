@@ -41,7 +41,6 @@ public class Medicamento {
     @JoinColumn(name = "categoriaId", nullable = false)
     private CategoriaMed categoria;
 
-
     
 
 }

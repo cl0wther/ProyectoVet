@@ -17,6 +17,5 @@ public class InventarioResponseDTO {
     private String ubicacion;
     private LocalDateTime ultimaReposicion;
     
-    // Un pequeño dato extra que podemos calcular en el Service para ayudar al Frontend:
-    private Boolean alertaStockCritico; // Será 'true' si stockActual <= stockMinimo
+    private Boolean alertaStockCritico; 
 }

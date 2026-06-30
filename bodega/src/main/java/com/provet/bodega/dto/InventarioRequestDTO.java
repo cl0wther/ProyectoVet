@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class InventarioRequestDTO {
     private Long idProducto;
-    private Integer stockInicial; // Con cuánto empezamos
-    private Integer stockMinimo;  // Cuándo debe saltar la alarma
-    private String ubicacion;     // Ej: "Bodega Central - Estante 2"
+    private Integer stockInicial; 
+    private Integer stockMinimo;  
+    private String ubicacion;     
 }

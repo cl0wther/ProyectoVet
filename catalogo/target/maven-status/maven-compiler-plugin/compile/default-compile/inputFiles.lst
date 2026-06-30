@@ -1,0 +1,12 @@
+C:\Users\mcord\Desktop\provetnacho\catalogo\src\main\java\com\provet\catalogo\CatalogoApplication.java
+C:\Users\mcord\Desktop\provetnacho\catalogo\src\main\java\com\provet\catalogo\config\DataInitializer.java
+C:\Users\mcord\Desktop\provetnacho\catalogo\src\main\java\com\provet\catalogo\controller\MedController.java
+C:\Users\mcord\Desktop\provetnacho\catalogo\src\main\java\com\provet\catalogo\dto\MedRequestDTO.java
+C:\Users\mcord\Desktop\provetnacho\catalogo\src\main\java\com\provet\catalogo\dto\MedResponseDTO.java
+C:\Users\mcord\Desktop\provetnacho\catalogo\src\main\java\com\provet\catalogo\exception\GlobalExceptionHandler.java
+C:\Users\mcord\Desktop\provetnacho\catalogo\src\main\java\com\provet\catalogo\model\CategoriaMed.java
+C:\Users\mcord\Desktop\provetnacho\catalogo\src\main\java\com\provet\catalogo\model\Medicamento.java
+C:\Users\mcord\Desktop\provetnacho\catalogo\src\main\java\com\provet\catalogo\repository\CategoriaRepository.java
+C:\Users\mcord\Desktop\provetnacho\catalogo\src\main\java\com\provet\catalogo\repository\MedRepository.java
+C:\Users\mcord\Desktop\provetnacho\catalogo\src\main\java\com\provet\catalogo\service\CategoriaService.java
+C:\Users\mcord\Desktop\provetnacho\catalogo\src\main\java\com\provet\catalogo\service\MedService.java

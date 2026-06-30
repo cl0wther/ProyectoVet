@@ -1,0 +1,31 @@
+-------------------------------------------------------------------------------
+Test set: com.provet.catalogo.MedServiceTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 1.674 s <<< FAILURE! -- in com.provet.catalogo.MedServiceTest
+com.provet.catalogo.MedServiceTest.eliminar_medicamentoExiste_eliminaCorrectamente -- Time elapsed: 1.466 s <<< ERROR!
+org.mockito.exceptions.misusing.UnnecessaryStubbingException: 
+
+Unnecessary stubbings detected.
+Clean & maintainable test code requires zero unnecessary code.
+Following stubbings are unnecessary (click to navigate to relevant line of code):
+  1. -> at com.provet.catalogo.MedServiceTest.eliminar_medicamentoExiste_eliminaCorrectamente(MedServiceTest.java:113)
+Please remove unnecessary stubbings or use 'lenient' strictness. More info: javadoc for UnnecessaryStubbingException class.
+	at org.mockito.junit.jupiter.MockitoExtension.lambda$afterEach$2(MockitoExtension.java:200)
+	at java.base/java.util.Optional.ifPresent(Optional.java:178)
+	at org.mockito.junit.jupiter.MockitoExtension.afterEach(MockitoExtension.java:198)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+com.provet.catalogo.MedServiceTest.crear_datosValidos_retornaMedicamentoCreado -- Time elapsed: 0.008 s <<< ERROR!
+java.lang.RuntimeException: Categoria no encontrada con Id 1
+	at com.provet.catalogo.service.MedService.lambda$guardar$0(MedService.java:38)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at com.provet.catalogo.service.MedService.guardar(MedService.java:38)
+	at com.provet.catalogo.MedServiceTest.crear_datosValidos_retornaMedicamentoCreado(MedServiceTest.java:105)
+
+com.provet.catalogo.MedServiceTest.eliminar_medicamentoNoExiste_lanzaExcepcion -- Time elapsed: 0.008 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting code to raise a throwable.
+	at com.provet.catalogo.MedServiceTest.eliminar_medicamentoNoExiste_lanzaExcepcion(MedServiceTest.java:124)
+
